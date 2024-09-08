@@ -24,6 +24,12 @@ keymap_config_t keymap_config;
  * and will return the corrected keycode, when appropriate.
  */
 __attribute__((weak)) uint16_t keycode_config(uint16_t keycode) {
+
+    // Disable all keycodes if full_lock is enabled, except for FL_ON, FL_OFF, and FL_TOGG
+    if (keymap_config.full_lock && (keycode != FL_ON && keycode != FL_OFF && keycode != FL_TOGG)) {
+        return KC_NO;
+    }
+
     switch (keycode) {
         case KC_CAPS_LOCK:
         case KC_LOCKING_CAPS_LOCK:

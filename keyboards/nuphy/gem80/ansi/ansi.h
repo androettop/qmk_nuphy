@@ -122,8 +122,6 @@ enum custom_keycodes {
     LOGO_HUI,
     LOGO_SPI,
     LOGO_SPD,
-
-    PABLO_TEST, // CUSTOM(29)
 };
 
 

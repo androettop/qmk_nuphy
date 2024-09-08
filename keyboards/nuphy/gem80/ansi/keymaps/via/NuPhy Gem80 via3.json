@@ -1,5 +1,5 @@
 {
-    "name": "NuPhy Gem80",
+    "name": "NuPhy Gem80 (@androettop)",
     "vendorId": "0x19F5",
     "productId": "0x3275",
     "matrix": {
@@ -333,10 +333,6 @@
         {
             "name": "Logo\nSlow",
             "title": "Logo Speed -"
-        },
-        {
-            "name": "Pablo\nPablo",
-            "title": "Pablo test"
         }
     ]
 }

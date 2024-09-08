@@ -79,14 +79,14 @@ bool process_magic(uint16_t keycode, keyrecord_t *record) {
                 case QK_MAGIC_SWAP_BACKSLASH_BACKSPACE:
                     keymap_config.swap_backslash_backspace = true;
                     break;
-                case QK_MAGIC_PABLO_TEST_MODE_ON:
-                    keymap_config.pablo_test_mode = true;
+                case QK_MAGIC_FULL_LOCK_ON:
+                    keymap_config.full_lock = true;
                     break;
-                case QK_MAGIC_PABLO_TEST_MODE_OFF:
-                    keymap_config.pablo_test_mode = false;
+                case QK_MAGIC_FULL_LOCK_OFF:
+                    keymap_config.full_lock = false;
                     break;
-                case QK_MAGIC_PABLO_TEST_MODE_TOGGLE:
-                    keymap_config.pablo_test_mode = !keymap_config.pablo_test_mode;
+                case QK_MAGIC_FULL_LOCK_TOGGLE:
+                    keymap_config.full_lock = !keymap_config.full_lock;
                     break;
                 case QK_MAGIC_NKRO_ON:
                     clear_keyboard(); // clear first buffer to prevent stuck keys

@@ -538,18 +538,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        case PABLO_TEST:
-            if (record->event.pressed) {
-                // Toggle last layer
-                layer_invert(7);
-                // enable pablo test module (red light)
-                keymap_config.pablo_test_mode = !keymap_config.pablo_test_mode;
-                eeconfig_update_keymap(keymap_config.raw);
-                m_break_all_key();
-            } else  unregister_code16(keycode);
-            break;
-
-
         case MAC_SEARCH:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -834,7 +822,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
         rgb_matrix_set_color(16, 0x00, 0x80, 0x00);
     }
 
-    if (keymap_config.pablo_test_mode) {
+    if (keymap_config.full_lock) {
         side_colour_set(0);
         logo_side_colour_set(0);
     } else {

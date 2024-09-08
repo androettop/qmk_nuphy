@@ -277,7 +277,7 @@ static void print_eeconfig(void) {
         ".swap_backslash_backspace: %u\n"
         ".nkro: %u\n"
         ".swap_escape_capslock: %u\n"
-        ".pablo_test_mode: %u\n"
+        ".full_lock: %u\n"
 
         , kc.raw
         , kc.swap_control_capslock
@@ -291,7 +291,7 @@ static void print_eeconfig(void) {
         , kc.swap_backslash_backspace
         , kc.nkro
         , kc.swap_escape_capslock
-        , kc.pablo_test_mode
+        , kc.full_lock
     ); /* clang-format on */
 
 #    ifdef BACKLIGHT_ENABLE
