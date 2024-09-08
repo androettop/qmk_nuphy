@@ -91,6 +91,7 @@ extern void side_mode_control(uint8_t dir);
 extern void logo_light_speed_control(uint8_t fast);
 extern void logo_light_level_control(uint8_t brighten);
 extern void logo_side_colour_control(uint8_t dir);
+extern void logo_side_colour_set(uint8_t col);
 extern void logo_side_mode_control(uint8_t dir);
 extern report_nkro_t *nkro_report;
 
@@ -833,8 +834,10 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
 
     if (keymap_config.pablo_test_mode) {
         side_colour_set(0);
+        logo_side_colour_set(0);
     } else {
         side_colour_set(1);
+        logo_side_colour_set(1);
     }
 
     rgb_matrix_set_color(RGB_MATRIX_LED_COUNT-1, 0, 0, 0);

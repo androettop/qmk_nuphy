@@ -43,11 +43,11 @@ const uint8_t logo_led_index_tab[LOGO_LINE] = {
     11,
 };
 
-uint8_t logo_mode           = 0;  
+uint8_t logo_mode           = 3;  
 uint8_t logo_light          = 3; 
 uint8_t logo_speed          = 2;  
-uint8_t logo_rgb            = 1; 
-uint8_t logo_colour         = 0; 
+uint8_t logo_rgb            = 0; 
+uint8_t logo_colour         = 1; 
 uint8_t logo_play_point     = 0;
 uint8_t logo_play_cnt       = 0; 
 uint32_t logo_play_timer    = 0;
@@ -117,6 +117,18 @@ void logo_side_colour_control(uint8_t dir)
             }
         }
     }
+    user_config.ee_logo_rgb    = logo_rgb;
+    user_config.ee_logo_colour = logo_colour;
+    eeconfig_update_user_datablock(&user_config);  
+}
+
+void logo_side_colour_set(uint8_t col)
+{
+    logo_mode   = SIDE_STATIC;
+    logo_rgb    = 0;
+    logo_colour = col;
+
+    user_config.ee_logo_mode = logo_mode;
     user_config.ee_logo_rgb    = logo_rgb;
     user_config.ee_logo_colour = logo_colour;
     eeconfig_update_user_datablock(&user_config);  
