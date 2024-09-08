@@ -86,6 +86,7 @@ void rgb_test_show(void);
 extern void light_speed_control(uint8_t fast);
 extern void light_level_control(uint8_t brighten);
 extern void side_colour_control(uint8_t dir);
+extern void side_colour_set(uint8_t col);
 extern void side_mode_control(uint8_t dir);
 extern void logo_light_speed_control(uint8_t fast);
 extern void logo_light_level_control(uint8_t brighten);
@@ -534,6 +535,18 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
+        case PABLO_TEST:
+            if (record->event.pressed) {
+                // Toggle last layer
+                layer_invert(7);
+                // enable pablo test module (red light)
+                keymap_config.pablo_test_mode = !keymap_config.pablo_test_mode;
+                eeconfig_update_keymap(keymap_config.raw);
+                m_break_all_key();
+            } else  unregister_code16(keycode);
+            break;
+
+
         case MAC_SEARCH:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -746,7 +759,7 @@ void timer_pro(void) {
  */
 void m_londing_eeprom_data(void)
 {
-    eeconfig_read_kb_datablock(&user_config);
+    eeconfig_read_user_datablock(&user_config);
     if (user_config.default_brightness_flag != 0xA5) {
         rgb_matrix_sethsv(  RGB_DEFAULT_COLOUR,
                             255,
@@ -816,6 +829,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
 {
     if (keymap_config.no_gui) {
         rgb_matrix_set_color(16, 0x00, 0x80, 0x00);
+    }
+
+    if (keymap_config.pablo_test_mode) {
+        side_colour_set(0);
+    } else {
+        side_colour_set(1);
     }
 
     rgb_matrix_set_color(RGB_MATRIX_LED_COUNT-1, 0, 0, 0);

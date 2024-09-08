@@ -44,6 +44,7 @@ typedef union {
         bool oneshot_enable : 1;
         bool swap_escape_capslock : 1;
         bool autocorrect_enable : 1;
+        bool pablo_test_mode : 1;
     };
 } keymap_config_t;
 

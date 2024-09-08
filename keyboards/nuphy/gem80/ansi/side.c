@@ -51,7 +51,7 @@ const uint8_t side_led_index_tab[SIDE_LINE] = {
 
 bool f_charging = 1;
 
-uint8_t side_mode           = 0;  
+uint8_t side_mode           = 3;  
 uint8_t side_light          = 3; 
 uint8_t side_speed          = 2;
 uint8_t side_rgb            = 1;  
@@ -186,6 +186,23 @@ void side_colour_control(uint8_t dir)
     user_config.ee_side_rgb    = side_rgb;
     user_config.ee_side_colour = side_colour;
     eeconfig_update_user_datablock(&user_config);  
+}
+
+/**
+ * @brief  Switch to a specific color of side lights.
+ * @param  col: 0 - 7.
+ * @note  save to eeprom.
+ */
+void side_colour_set(uint8_t col)
+{
+    side_mode = SIDE_STATIC;
+    side_rgb = 0;
+    side_colour = col;
+
+    user_config.ee_side_mode = side_mode;
+    user_config.ee_side_rgb = side_rgb;
+    user_config.ee_side_colour = side_colour;
+    eeconfig_update_user_datablock(&user_config);
 }
 
 /**
