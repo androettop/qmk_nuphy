@@ -10,6 +10,8 @@
 #define RF_LONG_PRESS_DELAY   30
 #define DEV_RESET_PRESS_DELAY 30
 #define RGB_TEST_PRESS_DELAY  30
+#define DEFAULT_LAYER_WIN  0
+#define DEFAULT_LAYER_MAC  1
 
 user_config_t user_config;
 
@@ -192,10 +194,10 @@ void long_press_key(void)
             f_win_lock = 0;
 
             if (dev_info.sys_sw_state == SYS_SW_MAC) {
-                default_layer_set(1 << 0);
+                default_layer_set(1 << DEFAULT_LAYER_MAC);
                 keymap_config.nkro = 0;
             } else {
-                default_layer_set(1 << 2);
+                default_layer_set(1 << DEFAULT_LAYER_WIN);
                 keymap_config.nkro = 1;
             }
         }
@@ -336,7 +338,7 @@ void dial_sw_scan(void)
     if (dial_scan & 0x02) {
         if (dev_info.sys_sw_state != SYS_SW_MAC) {
             f_sys_show = 1;
-            default_layer_set(1 << 0);
+            default_layer_set(1 << DEFAULT_LAYER_MAC);
             dev_info.sys_sw_state = SYS_SW_MAC;
             f_win_lock            = keymap_config.no_gui;
             m_break_all_key();
@@ -346,7 +348,7 @@ void dial_sw_scan(void)
     } else {
         if (dev_info.sys_sw_state != SYS_SW_WIN) {
             f_sys_show = 1;
-            default_layer_set(1 << 2);
+            default_layer_set(1 << DEFAULT_LAYER_WIN);
             dev_info.sys_sw_state = SYS_SW_WIN;
             keymap_config.no_gui  = f_win_lock;
             m_break_all_key();
@@ -414,7 +416,7 @@ void m_power_on_dial_sw_scan(void)
 #endif
     if (dial_scan_sys) {
         if (dev_info.sys_sw_state != SYS_SW_MAC) {
-            default_layer_set(1 << 0);
+            default_layer_set(1 << DEFAULT_LAYER_MAC);
             dev_info.sys_sw_state = SYS_SW_MAC;
             keymap_config.nkro    = 0;
             f_win_lock            = keymap_config.no_gui;
@@ -423,7 +425,7 @@ void m_power_on_dial_sw_scan(void)
         }
     } else {
         if (dev_info.sys_sw_state != SYS_SW_WIN) {
-            default_layer_set(1 << 2);
+            default_layer_set(1 << DEFAULT_LAYER_WIN);
             dev_info.sys_sw_state = SYS_SW_WIN;
             keymap_config.nkro    = 1;
             m_break_all_key();
